@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casting na Twojego faceta</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(to bottom, #ffdde1, #ee9ca7);
+            overflow: hidden;
+            position: relative;
+            height: 100vh;
+        }
+        .moving-button {
+            position: absolute;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            color: #fff;
+            background: #ff4b5c;
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            animation: moveButton 4s infinite;
+            transition: background 0.3s, opacity 0.5s ease-in-out;
+        }
+        .moving-button:hover {
+            background: #c83e4d;
+        }
+        @keyframes moveButton {
+            0% {
+                top: 10%;
+                left: 10%;
+            }
+            20% {
+                top: 10%;
+                left: 80%;
+            }
+            40% {
+                top: 80%;
+                left: 80%;
+            }
+            60% {
+                top: 80%;
+                left: 20%;
+            }
+            80% {
+                top: 40%;
+                left: 50%;
+            }
+            100% {
+                top: 10%;
+                left: 10%;
+            }
+        }
+        .container {
+            display: none;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 90%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+        .container.show {
+            display: block;
+            opacity: 1;
+        }
+        h1 {
+            font-size: 2.2em;
+            color: #ff4b5c;
+            margin: 0;
+        }
+        p {
+            font-size: 1.2em;
+            margin: 15px 0;
+        }
+        .candidate {
+            margin: 20px 0;
+            text-align: left;
+        }
+        .candidate h2 {
+            font-size: 1.5em;
+            color: #ff4b5c;
+            margin: 0;
+        }
+        .candidate p {
+            font-size: 1em;
+            margin: 5px 0 15px;
+        }
+        .button-container button, .candidate button {
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #fff;
+            background: #ff4b5c;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s, transform 0.2s;
+            margin: 5px;
+        }
+        .button-container button:hover, .candidate button:hover {
+            background: #c83e4d;
+            transform: scale(1.1);
+        }
+        .candidate button {
+            display: inline-block;
+        }
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff4b5c;
+            transform: rotate(45deg);
+            animation: floatHearts 6s infinite ease-in-out;
+        }
+        .heart::before, .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff4b5c;
+            border-radius: 50%;
+        }
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+        .heart::after {
+            left: -10px;
+            top: 0;
+        }
+        @keyframes floatHearts {
+            0% {
+                transform: translate(0, 0) rotate(45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(200px, -200px) rotate(45deg);
+                opacity: 0;
+            }
+        }
+        .heart:nth-child(2) {
+            animation-delay: 1s;
+            top: 30%;
+            left: 60%;
+        }
+        .heart:nth-child(3) {
+            animation-delay: 2s;
+            top: 50%;
+            left: 30%;
+        }
+        .heart:nth-child(4) {
+            animation-delay: 3s;
+            top: 70%;
+            left: 80%;
+        }
+        .heart:nth-child(5) {
+            animation-delay: 4s;
+            top: 20%;
+            left: 40%;
+        }
+        .heart:nth-child(6) {
+            animation-delay: 5s;
+            top: 60%;
+            left: 10%;
+        }
+    </style>
+</head>
+<body>
+    <div class="heart" style="top: 40%; left: 50%;"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+    <div class="heart"></div>
+
+    <button class="moving-button" onclick="showContainer()">Kliknij mnie!</button>
+
+    <div class="container" id="question-container">
+        <h1>Casting na Twojego faceta 🕺</h1>
+        <p>Wybierz swojego kandydata:</p>
+
+        <div class="candidate">
+            <h2>Arek</h2>
+            <p>Przystojny i inteligentny, twój misiek i kierowca w jednym. 🤵</p>
+            <button onclick="showMessage('Kandydat 1')">Tak! To jego chcę!</button>
+        </div>
+
+        <div class="candidate">
+            <h2>Jakiś ciapciak</h2>
+            <p>Niby fajny, ale bez przesady, zdecydowanie to ta gorsza opcja.</p>
+            <button onclick="showMessage('Kandydat 2')">Wybierz jakiegoś ciapciaka</button>
+        </div>
+    </div>
+
+    <div class="container" id="result-container">
+        <h1 id="result-heading"></h1>
+        <p id="result-message"></p>
+        <div class="button-container">
+            <button onclick="goBack()">Wróć do wyboru</button>
+        </div>
+    </div>
+
+    <script>
+        function showContainer() {
+            const button = document.querySelector('.moving-button');
+            button.style.opacity = 0;
+            setTimeout(() => {
+                button.style.display = 'none';
+                const container = document.getElementById('question-container');
+                container.classList.add('show');
+            }, 500);
+        }
+
+        function showMessage(candidate) {
+            const questionContainer = document.getElementById('question-container');
+            const resultContainer = document.getElementById('result-container');
+            const resultHeading = document.getElementById('result-heading');
+            const resultMessage = document.getElementById('result-message');
+            
+            questionContainer.classList.remove('show');
+            resultContainer.classList.add('show');
+
+            if (candidate === 'Kandydat 1') {
+                resultHeading.innerHTML = 'Wyśmienity wybór! 😎';
+                resultMessage.innerHTML = 'Czy to znaczy, że mogę oficjalnie zostać Twoim facetem? 🥰';
+            } else {
+                resultHeading.innerHTML = 'Ups...';
+                resultMessage.innerHTML = 'Niechcący kliknęłaś w złą opcję. Upewnij się, że dobrze wybierasz!';
+            }
+        }
+
+        function goBack() {
+            const resultContainer = document.getElementById('result-container');
+            const questionContainer = document.getElementById('question-container');
+            
+            resultContainer.classList.remove('show');
+            questionContainer.classList.add('show');
+        }
+    </script>
+</body>
+</html>
