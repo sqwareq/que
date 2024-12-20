@@ -208,7 +208,7 @@
         <h1 id="result-heading"></h1>
         <p id="result-message"></p>
         <div class="button-container">
-            <button onclick="goBack()">Wróć do wyboru</button>
+            <button id="back-button" onclick="goBack()">Wróć do wyboru</button>
         </div>
     </div>
 
@@ -228,16 +228,19 @@
             const resultContainer = document.getElementById('result-container');
             const resultHeading = document.getElementById('result-heading');
             const resultMessage = document.getElementById('result-message');
-            
+            const backButton = document.getElementById('back-button');
+
             questionContainer.classList.remove('show');
             resultContainer.classList.add('show');
 
             if (candidate === 'Kandydat 1') {
                 resultHeading.innerHTML = 'Wyśmienity wybór! 😎';
                 resultMessage.innerHTML = 'Czy to znaczy, że mogę oficjalnie zostać Twoim facetem? 🥰';
+                backButton.style.display = 'none';
             } else {
                 resultHeading.innerHTML = 'Ups...';
                 resultMessage.innerHTML = 'Niechcący kliknęłaś w złą opcję. Upewnij się, że dobrze wybierasz!';
+                backButton.style.display = 'inline-block';
             }
         }
 
@@ -251,3 +254,4 @@
     </script>
 </body>
 </html>
+
